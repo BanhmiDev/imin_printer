@@ -73,21 +73,25 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
         _context = flutterPluginBinding.getApplicationContext();
         eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "imin_printer_event");
         List<String> modelList = Arrays.asList(modelArry);
-        if (modelList.contains(Build.MODEL)) {
-            //初始化 2.0 的 SDK。
-            PrinterHelper.getInstance().initPrinterService(_context);
-            sdkVersion = "2.0.0";
-        } else {
-            //初始化 1.0 SDK
-            iminPrintUtils = IminPrintUtils.getInstance(_context);
-            String deviceModel = Utils.getInstance().getModel();
-            if (deviceModel.contains("M2-203") || deviceModel.contains("M2-202") || deviceModel.contains("M2-Pro")) {
-                connectType = IminPrintUtils.PrintConnectType.SPI;
+        try {
+            if (modelList.contains(Build.MODEL)) {
+                //初始化 2.0 的 SDK。
+                PrinterHelper.getInstance().initPrinterService(_context);
+                sdkVersion = "2.0.0";
             } else {
-                connectType = IminPrintUtils.PrintConnectType.USB;
+                //初始化 1.0 SDK
+                iminPrintUtils = IminPrintUtils.getInstance(_context);
+                String deviceModel = Utils.getInstance().getModel();
+                if (deviceModel.contains("M2-203") || deviceModel.contains("M2-202") || deviceModel.contains("M2-Pro")) {
+                    connectType = IminPrintUtils.PrintConnectType.SPI;
+                } else {
+                    connectType = IminPrintUtils.PrintConnectType.USB;
+                }
+                iminPrintUtils.resetDevice();
+                sdkVersion = "1.0.0";
             }
-            iminPrintUtils.resetDevice();
-            sdkVersion = "1.0.0";
+        } catch (Exception e) {
+            // Blackbox
         }
         eventChannel.setStreamHandler(this);
         channel.setMethodCallHandler(this);
