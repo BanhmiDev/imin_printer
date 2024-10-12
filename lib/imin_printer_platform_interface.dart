@@ -202,6 +202,10 @@ abstract class IminPrinterPlatform extends PlatformInterface {
     throw UnimplementedError('openCashBox() has not been implemented.');
   }
 
+  Future<void> bindService() {
+    throw UnimplementedError('bindService() has not been implemented.');
+  }
+  
   Future<void> unBindService() {
     throw UnimplementedError('unBindService() has not been implemented.');
   }
