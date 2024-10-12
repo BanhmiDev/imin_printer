@@ -521,6 +521,10 @@ class IminPrinter {
     return IminPrinterPlatform.instance.openCashBox();
   }
 
+  Future<void> bindService() {
+    return IminPrinterPlatform.instance.bindService();
+  }
+  
   Future<void> unBindService() {
     return IminPrinterPlatform.instance.unBindService();
   }
