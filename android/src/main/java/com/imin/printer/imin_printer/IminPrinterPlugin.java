@@ -1174,9 +1174,15 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-        if (channel != null)
+        try
         {
-            channel.setMethodCallHandler(null);
+            if (channel != null)
+            {
+                channel.setMethodCallHandler(null);
+            }
+        } catch (Exception e)
+        {
+            // Silent
         }
     }
 
