@@ -74,7 +74,6 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
         eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "imin_printer_event");
         eventChannel.setStreamHandler(this);
         channel.setMethodCallHandler(this);
-
     }
 
     @SuppressLint("NewApi")
@@ -89,7 +88,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                     iminPrintUtils.initPrinter(connectType);
                     result.success(true);
                 } else {
-                    Log.d(TAG, _context.getPackageName());
+                    //Log.d(TAG, _context.getPackageName());
                     PrinterHelper.getInstance().initPrinter(_context.getPackageName(), null);
                 }
                 break;
@@ -512,14 +511,14 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                         if (iminPrintUtils != null) {
                             iminPrintUtils.printBarCode(barCodeType, barCodeContent);
                         } else {
-                            Log.d("IminPrinter:printBarCode", "barCodeType:" + barCodeType);
-                            Log.d("IminPrinter:printBarCode", "barCodeContent:" + barCodeContent);
+                            //Log.d("IminPrinter:printBarCode", "barCodeType:" + barCodeType);
+                            //Log.d("IminPrinter:printBarCode", "barCodeContent:" + barCodeContent);
                             PrinterHelper.getInstance().printBarCode(barCodeContent, barCodeType, null);
                         }
                     }
                     result.success(true);
                 } catch (Exception e) {
-                    Log.e("IminPrinter", e.getMessage());
+                    //Log.e("IminPrinter", e.getMessage());
                 }
                 break;
             case "setDoubleQRSize":
@@ -963,7 +962,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
             case "setCodeAlignment":
                 if (iminPrintUtils == null) {
                     int align = call.argument("align");
-                    Log.d("TAG", "setCodeAlignment: " + align);
+                    //Log.d("TAG", "setCodeAlignment: " + align);
                     PrinterHelper.getInstance().setCodeAlignment(align);
                 }
                 result.success(true);
@@ -1001,7 +1000,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
             case "setTextBitmapStyle":
                 if (iminPrintUtils == null) {
                     int textBitmapStyle = call.argument("style");
-                    Log.d("setTextBitmapStyle", "setTextBitmapStyle: " + textBitmapStyle);
+                    //Log.d("setTextBitmapStyle", "setTextBitmapStyle: " + textBitmapStyle);
                     PrinterHelper.getInstance().setTextBitmapStyle(textBitmapStyle);
                 }
                 result.success(true);
@@ -1160,7 +1159,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
             @Override
             public void onReceive(Context context, Intent intent) {
                 int status = intent.getIntExtra(ACTION_PRITER_STATUS, -1);
-                Log.d("TAG", "打印机状态：" + intent.getAction());
+                //Log.d("TAG", "打印机状态：" + intent.getAction());
                 if (intent.getAction().equals(ACTION_PRITER_STATUS_CHANGE)) {
                     Map<String, Object> result = new HashMap<String, Object>();
                     result.put("status", status);
@@ -1175,7 +1174,10 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-        channel.setMethodCallHandler(null);
+        if (channel != null)
+        {
+            channel.setMethodCallHandler(null);
+        }
     }
 
     @Override
