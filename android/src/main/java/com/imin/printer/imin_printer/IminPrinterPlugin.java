@@ -228,7 +228,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                     }
                     result.success(true);
                 } catch (Exception err) {
-                    Log.e("IminPrinter", err.getMessage());
+                    //Log.e("IminPrinter", err.getMessage());
                 }
                 break;
             case "printText":
@@ -1175,13 +1175,13 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                     }
                     result.success(true);
                 } catch (Exception err) {
-                    Log.e("IminPrinter", "printBitmapColorChart:" + err.getMessage());
+                    //Log.e("IminPrinter", "printBitmapColorChart:" + err.getMessage());
                 }
                 result.success(true);
                 break;
             case "printColumnsString":
                 String colsString = call.argument("cols");
-                Log.e("IminPrinter","printColumnsString ===> "+colsString);
+                //Log.e("IminPrinter","printColumnsString ===> "+colsString);
                 try {
                     JSONArray cols = new JSONArray(colsString);
                     String[] colsText = new String[cols.length()];
@@ -1204,7 +1204,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                     }
                     result.success(true);
                 } catch (Exception err) {
-                    Log.e("IminPrinter", err.getMessage());
+                    //Log.e("IminPrinter", err.getMessage());
                     result.success(false);
                 }
 
@@ -1265,7 +1265,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                         Integer posY = (Integer) labelCanvasStyleMap.get("posY");
 
                         // 使用解析后的数据
-                        Log.e("IminPrinter", "labelInitCanvas:" + width+" "+height1+" "+posX+" ,y= "+posY);
+                        //Log.e("IminPrinter", "labelInitCanvas:" + width+" "+height1+" "+posX+" ,y= "+posY);
                         PrinterHelper.getInstance().labelInitCanvas(LabelCanvasStyle.getCanvasStyle()
                                 .setWidth(width)
                                 .setHeight(height1)
@@ -1279,7 +1279,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                 break;
             case "labelAddText"://绘制文本内容
             {
-                Log.e("IminPrinter", "labelAddText: 点击绘制文本" );
+                //Log.e("IminPrinter", "labelAddText: 点击绘制文本" );
                 if (iminPrintUtils == null){
                     String textLabel = call.argument("text");
                     Map<String, Object> labelAddTexteMap = call.argument("labelTexStyle");
@@ -1301,8 +1301,8 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                         Boolean enableItalics = (Boolean) labelAddTexteMap.get("enableItalics");
                         Boolean enAntiColor = (Boolean) labelAddTexteMap.get("enAntiColor");
 
-                        Log.e("IminPrinter", "labelAddText: 点击绘制文本 " +textLabel+",width=" +
-                                width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,rotateStr= "+rotateStr+" ,enableBold= "+enableBold);
+                        //Log.e("IminPrinter", "labelAddText: 点击绘制文本 " +textLabel+",width=" +
+                        //        width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,rotateStr= "+rotateStr+" ,enableBold= "+enableBold);
 
                         // 将字符串转换为枚举类型
                         Align align = Align.valueOf(alignStr);
@@ -1353,8 +1353,8 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                         HumanReadable readable1 = HumanReadable.valueOf(readable);
                         Symbology symbology1 = Symbology.valueOf(symbology);
 
-                        Log.e("IminPrinter", "labelAddBarCode: 绘制条形码内容 " +barCode+",width=" +
-                                width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,readable= "+readable+" ,symbology= "+symbology+"  ,HumanReadable=>   "+readable1);
+                        //Log.e("IminPrinter", "labelAddBarCode: 绘制条形码内容 " +barCode+",width=" +
+                        //        width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,readable= "+readable+" ,symbology= "+symbology+"  ,HumanReadable=>   "+readable1);
 
                         PrinterHelper.getInstance().labelAddBarCode(barCode, LabelBarCodeStyle.getBarCodeStyle()
                                 .setPosX(posX)
@@ -1373,13 +1373,13 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                     result.success(true);
                 }
 
-                Log.e("IminPrinter", "labelAddBarCode: 绘制条形码内容" );
+                //Log.e("IminPrinter", "labelAddBarCode: 绘制条形码内容" );
 
             }
                 break;
             case "labelAddQrCode"://绘制二维码内容
             {
-                Log.e("IminPrinter", "labelAddQrCode: 绘制二维码内容" );
+                //Log.e("IminPrinter", "labelAddQrCode: 绘制二维码内容" );
                 if (iminPrintUtils == null){
                     String qrCode = call.argument("qrCode");
                     Map<String, Object> qrCodeStyleMap = call.argument("qrCodeStyle");
@@ -1392,8 +1392,8 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                         String rotateStr = (String) qrCodeStyleMap.get("rotate");
                         Integer width = (Integer) qrCodeStyleMap.get("width");
                         Integer height1 = (Integer) qrCodeStyleMap.get("height");
-                        Log.e("IminPrinter", "labelAddQrCode: 绘制二维码内容 " +qrCode+",width=" +
-                                width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,errorLevelStr= "+errorLevelStr+" ,size= "+size1);
+                        //Log.e("IminPrinter", "labelAddQrCode: 绘制二维码内容 " +qrCode+",width=" +
+                        //        width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,errorLevelStr= "+errorLevelStr+" ,size= "+size1);
 
                         Rotate rotate = Rotate.valueOf(rotateStr);
                         ErrorLevel errorLevel = ErrorLevel.valueOf(errorLevelStr);
@@ -1416,7 +1416,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                 break;
             case "labelAddBitmap"://绘制图像
             {
-                Log.e("IminPrinter", "labelAddBitmap: 绘制图像" );
+                //Log.e("IminPrinter", "labelAddBitmap: 绘制图像" );
                 if (iminPrintUtils == null){
                     new Thread(new Runnable() {
                         @Override
@@ -1433,7 +1433,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                                 Integer height1 = (Integer) labelAddAreaMap.get("height");
                                 ImageAlgorithm imageAlgorithm = ImageAlgorithm.valueOf(algorithm);
 
-                                Log.e("IminPrinter", "labelAddBitmap: 绘制图像 " +bitmapUrl+" ,width=" + width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,algorithm= "+algorithm+" ,value= "+value);
+                                //Log.e("IminPrinter", "labelAddBitmap: 绘制图像 " +bitmapUrl+" ,width=" + width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,algorithm= "+algorithm+" ,value= "+value);
 
                                 Bitmap bitmap = null;
                                 if (bitmapUrl == null || bitmapUrl.isEmpty()){
@@ -1453,7 +1453,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
 
                                 result.success(true);
                             }catch (Exception e){
-                                Log.e("IminPrinter", "labelAddBitmap: 绘制图像 e"+e.getMessage() );
+                                //Log.e("IminPrinter", "labelAddBitmap: 绘制图像 e"+e.getMessage() );
                                 result.success(false);
                             }
                         }
@@ -1465,7 +1465,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                 break;
             case "printLabelBitmap"://打印标签样式的图片
             {
-                Log.e("IminPrinter", "printLabelBitmap: 打印标签样式的图片" );
+                //Log.e("IminPrinter", "printLabelBitmap: 打印标签样式的图片" );
                 if (iminPrintUtils == null){
                     new Thread(new Runnable() {
                         @Override
@@ -1477,8 +1477,8 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                                 Integer width = (Integer) labelAddAreaMap.get("width");
                                 Integer height1 = (Integer) labelAddAreaMap.get("height");
 
-                                Log.e("IminPrinter", "labelAddArea: 绘制特殊图形 " +",width=" +
-                                        width+" ,height1= "+height1+"  ,bitmapUrl= "+bitmapUrl+(bitmapBase64==null));
+                                //Log.e("IminPrinter", "labelAddArea: 绘制特殊图形 " +",width=" +
+                                //        width+" ,height1= "+height1+"  ,bitmapUrl= "+bitmapUrl+(bitmapBase64==null));
 
                                 Bitmap bitmap = null;
                                 if (bitmapUrl == null || bitmapUrl.isEmpty()){
@@ -1494,7 +1494,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
 
                                 result.success(true);
                             }catch (Exception e){
-                                Log.e("IminPrinter", "printLabelBitmap: 打印标签样式的图片 e " +e.getMessage());
+                                //Log.e("IminPrinter", "printLabelBitmap: 打印标签样式的图片 e " +e.getMessage());
                                 result.success(false);
                             }
                         }
@@ -1519,8 +1519,8 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                         Integer endX = (Integer) labelAddAreaMap.get("endX");
                         Integer endY = (Integer) labelAddAreaMap.get("endY");
                         Integer thick = (Integer) labelAddAreaMap.get("thick");
-                        Log.e("IminPrinter", "labelAddArea: 绘制特殊图形 " +styleString+",width=" +
-                                width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,endX= "+endX+" ,endY= "+endY+" ,thick= "+thick);
+                        //Log.e("IminPrinter", "labelAddArea: 绘制特殊图形 " +styleString+",width=" +
+                        //        width+" ,height1= "+height1+" ,posX= "+posX+" ,posY= "+posY+" ,endX= "+endX+" ,endY= "+endY+" ,thick= "+thick);
                         // 转换字符串到枚举
                         Shape styleShape = Shape.valueOf(styleString);
                         PrinterHelper.getInstance().labelAddArea(LabelAreaStyle.getAreaStyle()
@@ -1543,7 +1543,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
 
                 if (iminPrintUtils == null){
                     int printCount = call.argument("printCount");
-                    Log.e("IminPrinter", "labelPrintCanvas: 打印绘制的内容 =>" +printCount);
+                    //Log.e("IminPrinter", "labelPrintCanvas: 打印绘制的内容 =>" +printCount);
                     PrinterHelper.getInstance().labelPrintCanvas(printCount, new ILabelPrintResult() {
                         @Override
                         public void onResult(int resultCode, String message) throws RemoteException {
@@ -1564,7 +1564,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
             {
 
                 if (iminPrintUtils == null){
-                    Log.e("IminPrinter", "labelLearning: 标签学习");
+                    //Log.e("IminPrinter", "labelLearning: 标签学习");
                     PrinterHelper.getInstance().labelPaperLearning(new INeoPrinterCallback() {
                         @Override
                         public void onRunResult(boolean isSuccess) throws RemoteException {
@@ -1573,7 +1573,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
 
                         @Override
                         public void onReturnString(String s) throws RemoteException {
-                            Log.e("IminPrinter", "labelLearning: 标签学习" +s);
+                            //Log.e("IminPrinter", "labelLearning: 标签学习" +s);
                             result.success(true);
                         }
 
@@ -1596,7 +1596,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
 
                 if (iminPrintUtils == null){
                     int printModel = call.argument("printModel");
-                    Log.e("IminPrinter", "setPrintModel: 设置打印模式" +printModel);
+                    //Log.e("IminPrinter", "setPrintModel: 设置打印模式" +printModel);
                     PrinterHelper.getInstance().setPrinterMode(printModel);
                     result.success(true);
                 }
@@ -1606,7 +1606,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
             {
 
                 if (iminPrintUtils == null){
-                    Log.e("IminPrinter", "getPrintModel: 获取当前打印机模式" );
+                    //Log.e("IminPrinter", "getPrintModel: 获取当前打印机模式" );
                     PrinterHelper.getInstance().labelGetPrinterMode(new INeoPrinterCallback() {
                         @Override
                         public void onRunResult(boolean isSuccess) throws RemoteException {
@@ -1614,7 +1614,7 @@ public class IminPrinterPlugin implements FlutterPlugin, MethodCallHandler, Stre
                         }
                         @Override
                         public void onReturnString(String string) throws RemoteException {
-                            Log.e("IminPrinter", "getPrintModel: 获取当前打印机模式"+ string);
+                            //Log.e("IminPrinter", "getPrintModel: 获取当前打印机模式"+ string);
                             if (string != null && !string.isEmpty()){
                                 if (string.equalsIgnoreCase("Label")){
                                     result.success(1);
